@@ -1,15 +1,15 @@
 import Vue from 'vue'
-import { createPinia, PiniaVuePlugin } from 'pinia'
+import axios from "axios"
 
 import App from './App.vue'
 import router from './router'
+import store from "./store"
 
 import './assets/main.css'
-
-Vue.use(PiniaVuePlugin)
+axios.defaults.baseURL = "http://localhost:3000"
 
 new Vue({
   router,
-  pinia: createPinia(),
+  store,
   render: (h) => h(App)
 }).$mount('#app')
