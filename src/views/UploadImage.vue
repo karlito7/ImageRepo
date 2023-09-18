@@ -11,19 +11,16 @@ export default {
     components: { DocumentationIcon, vueDropzone: vue2Dropzone },
     data() {
         return {
-          dropzoneOptions: {
-            thumbnailWidth: 150,
-          }
+            dropzoneOptions: {
+              url: this.$store.getters.getUploadURL,
+              thumbnailWidth: 150
+            }
       }
     },
-    methods: {
-        upload() {
-            const files = this.$refs.dropzone.getAcceptedFiles();
-            this.$store.dispatch("uploadImages", files);
+    watch: {
+        filter(value) {
+            this.updateActiveFilter(value);
         },
-        removeAllFiles() {
-          this.$refs.dropzone.removeAllFiles();
-        }
     },
 };
 </script>
@@ -32,8 +29,6 @@ export default {
 <div>
 
 
-  <vue-dropzone ref="dropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
-<button type="button" @click="upload">Upload</button>
-<button type="button" @click="removeAllFiles">Remove all files</button>
+<vue-dropzone ref="dropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
     </div>
 </template>
