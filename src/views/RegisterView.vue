@@ -25,7 +25,7 @@ export default {
         <label for="username-input">Username</label>
         <input type="text" id="username-input" name="username" v-model="username">
         <label for="password-input">Password</label>
-        <input type="pasword" id="password-input" name="password" v-model="password">
+        <input type="password" id="password-input" name="password" v-model="password">
 
         <div style="height:3rem;"></div>
 
