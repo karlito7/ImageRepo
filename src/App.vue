@@ -5,8 +5,16 @@ import UserInfo from './components/UserInfo.vue'
 export default {
   components: {UserInfo},
     computed: {
-        ...mapGetters(["isAuthenticated"]),
+        ...mapGetters(["isAuthenticated", "getUsername"]),
     },
+    methods: {
+      logout() {
+        const res = this.$store.dispatch('logout');
+        if (res) {
+          this.$router.replace({path: "/login"});
+        }
+      }
+    }
 };
 </script>
 
@@ -14,15 +22,15 @@ export default {
   <div id="app">
     <div v-if="isAuthenticated" id="auth-layout">
       <header>
-        <div class="profile-img">P</div>
+        <div class="profile-img"><span>{{getUsername[0]}}</span></div>
 
         <div class="wrapper">
-            <UserInfo username="Username" />
-            <!-- <nav>
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-            </nav> -->
+            <UserInfo :username="getUsername" />
         </div>
+
+<button class="upload-btn"><router-link to="/upload-image">Upload image +</router-link></button>
+        
+            <button @click="logout">Logout</button>
       </header>
 
       <router-view />
@@ -95,5 +103,51 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+.profile-img {
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00bd7e;
+  border-radius: 12px;
+  border: 1px solid #00bd7e;
+}
+.profile-img span {
+  display: block;
+  height: 90%;
+font-size: 56px;
+  font-weight: 800;
+}
+
+button {
+    display: block;
+    width: 120px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid #00bd7e;
+    color: #00bd7e;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.upload-btn {
+  width: 150px;
+}
+button:hover {
+    background-color: #00bd7e;
+    color: black;
+}
+button a {
+  font-size: 16px;
+    font-weight: 600;
+}
+button a:hover {
+  background-color: transparent;
+}
+button a:hover {
+  color: black;
 }
 </style>
