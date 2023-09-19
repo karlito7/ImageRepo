@@ -7,6 +7,9 @@
 }
 
 #auth-layout {
+  height: inherit;
+  display: flex;
+  align-items: center;
   padding: 2rem;
   font-weight: normal;
 }
