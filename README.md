@@ -46,5 +46,5 @@ npm run start
 
 ![screenshot-register](https://github.com/karlito7/ImageRepo/blob/main/src/assets/static/screenshot-register.JPG)
 ![screenshot-login](https://github.com/karlito7/ImageRepo/blob/main/src/assets/static/screenshot-login.JPG)
-![screenshot-upload](https://github.com/karlito7/ImageRepo/blob/main/src/assets/static/screenshot-register.JPG)
+![screenshot-upload](https://github.com/karlito7/ImageRepo/blob/main/src/assets/static/screenshot-upload.JPG)
 ![screenshot-preview](https://github.com/karlito7/ImageRepo/blob/main/src/assets/static/screenshot-preview.JPG)
