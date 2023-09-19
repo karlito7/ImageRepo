@@ -47,38 +47,38 @@ export default new Vuex.Store({
           return true;
       }).
           catch((err) => {
-              commit("setRes", `Error: ${err.message}`, { root: true });
+              commit("setRes", `Error: ${err.message}`);
               return false;
           });
       },
       register ({commit}, payload) {
-        return axios.post("/user", payload).then((res) => {
+        return axios.post("/user", payload).then(() => {
           return true;
       }).
           catch((err) => {
-              commit("setRes", `Error: ${err.message}`, { root: true });
+              commit("setRes", `Error: ${err.message}`);
               return false;
           });
       },
       uploadImages ({ commit }, payload) {
         return axios.post("/user/1/images", payload).then((res) => {
             commit("addNew", res.data);
-            commit("setRes", "Image uploaded successfully", { root: true });
+            commit("setRes", "Image uploaded successfully");
             return true;
         }).
             catch((err) => {
-                commit("setRes", `Error: ${err.message}`, { root: true });
+                commit("setRes", `Error: ${err.message}`);
                 return false;
             });
       },
       readImages ({ commit }, payload) {
         return axios.get("/image", payload).then((res) => {
             commit("addNew", res.data);
-            commit("setRes", "Image uploaded successfully", { root: true });
+            commit("setRes", "Image uploaded successfully");
             return true;
         }).
             catch((err) => {
-                commit("setRes", `Error: ${err.message}`, { root: true });
+                commit("setRes", `Error: ${err.message}`);
                 return false;
             });
       },
