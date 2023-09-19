@@ -19,12 +19,6 @@ Odvija se interna komunikacija sa serverom zaduženim za navedene funkcionalnost
 - Vue dropzone - paket se kroisti za drag&drop slika u kontenje koji zatim šalje podatke na server preko API rute.
 - Vite - moderni build tool za pokretanje klijentske aplikacije 
 
-- ### **ENV**
-    Prije samog pokretanja projekta potrebno je kreirati ***.env*** datoteku i definirati API prema kojem će se izvršavati pozivi u svrhu dohvaćanja podataka potrebnih za nesmetani rad aplikacije.
-
-    Zadana ruta za development:
-    >VUE_APP_MANAGER_BASE_URL=http://localhost:3000
-
 ## Pokretanje lokalno
 
 Klonirati [projekt](https://github.com/karlito7/ImageRepo.git) s GitHub-a preko terminala:
