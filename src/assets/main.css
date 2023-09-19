@@ -1,5 +1,11 @@
 @import "./base.css";
 
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 #auth-layout {
   padding: 2rem;
   font-weight: normal;
