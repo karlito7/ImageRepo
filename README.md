@@ -33,7 +33,7 @@ npm install
 ```
 Pokrenuti projekt komandom:
 ```
-npm run start
+npm run dev
 ```
 
 ## Screenshotovi aplikacije
