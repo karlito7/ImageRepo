@@ -1,29 +1,47 @@
-# imagerepo
+# ImageRepo
 
-This template should help get you started developing with Vue 3 in Vite.
+Web aplikacija za spremanje slika.
 
-## Recommended IDE Setup
+- ### **Osnovne informacije** 
+Aplikacija je zamišljena da se koristi za pohranu slika, a kasnije i drugih tipova datoteka. Osnovne funkcionalnosti su:
+- kreiranje novog korisnika 
+- pohrana slika. Moguće je učitati jednu ili više slika istovremeno
+- pregled pohranjenih slika
+- brisanje pojedinih slika
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Odvija se interna komunikacija sa serverom zaduženim za navedene funkcionalnosti. ([Link](https://github.com/karlito7/ImageRepoAPI.git) za repozitorij na kojem se nalazi API.
 
-## Customize configuration
+- ### **Korišteni paketi**
+- Axios - vrši komunikaciju sa API-jem
+- Vue.js
+- Vue router
+- Vuex
+- Vue dropzone - paket se kroisti za drag&drop slika u kontenje koji zatim šalje podatke na server preko API rute.
+- Vite - moderni build tool za pokretanje klijentske aplikacije 
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- ### **ENV**
+    Prije samog pokretanja projekta potrebno je kreirati ***.env*** datoteku i definirati API prema kojem će se izvršavati pozivi u svrhu dohvaćanja podataka potrebnih za nesmetani rad aplikacije.
 
-## Project Setup
+    Zadana ruta za development:
+    >VUE_APP_MANAGER_BASE_URL=http://localhost:3000
 
-```sh
+## Pokretanje lokalno
+
+Klonirati [projekt](https://github.com/karlito7/ImageRepo.git) s GitHub-a preko terminala:
+
+> `git clone https://github.com/karlito7/ImageRepo.git`
+
+Otvoriti direktorij u tekst editoru ([VS Code](https://code.visualstudio.com/)):
+
+Instalirati potrebne pakete korišteći [npm](https://www.npmjs.com/):
+```
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+Pokrenuti projekt komandom:
+```
+npm run start
 ```
 
-### Compile and Minify for Production
+## Screenshotovi aplikacije
 
-```sh
-npm run build
-```
+![screenshot-register](https://github.com/karlito7/ImageRepo/blob/main/src/assets/static/screenshot-register.JPG)
