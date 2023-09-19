@@ -10,7 +10,7 @@ export default {
     methods: {
         async login() {
             await this.$store.dispatch("login", {username: this.username, password: this.password}).then(() => {
-                this.$router.replace({ path: '/' })
+                this.$router.replace({ path: '/' });
             });
         }
     }
