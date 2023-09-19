@@ -3,6 +3,7 @@ import { mapGetters } from "vuex";
 import UserInfo from './components/UserInfo.vue'
 
 export default {
+  components: {UserInfo},
     computed: {
         ...mapGetters(["isAuthenticated"]),
     },
