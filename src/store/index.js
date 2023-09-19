@@ -7,7 +7,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
       user: null,
-      filter: 0,
       imageList: [],
       res: "",
       showRes: false
@@ -15,9 +14,6 @@ export default new Vuex.Store({
     mutations: {
       setUser: (state, payload) => {
         state.user = payload
-      },
-      setFilter: (state, payload) => {
-        state.filter = payload
       },
       setRes: (state, payload) => {
         state.res = payload;
@@ -44,9 +40,6 @@ export default new Vuex.Store({
       isAuthenticated: (state) => {
         return !!state.user; 
       },
-        getFilter: (state) => {
-          return state.filter;
-        },
         getUploadURL: (state) => {
           if (!!state.user) {
             return `http://localhost:3000/user/${state.user.id}/image`
@@ -57,6 +50,9 @@ export default new Vuex.Store({
         },
         getRes: (state) => {
           return state.res;
+        },
+        getUsername: (state) => {
+          return state.user.username;
         },
     },
     actions: {
@@ -79,6 +75,10 @@ export default new Vuex.Store({
               return false;
           });
       },
+      logout({commit}) {
+        commit("setUser", null);
+        return true;
+      },
       readImages ({ state, commit }, payload) {
         return axios.get(`/user/${state.user.id}/images`, payload).then((res) => {
             commit("setImageList", res.data);
@@ -94,7 +94,7 @@ export default new Vuex.Store({
           const blob = new Blob([res.data], { type: 'image/jpeg' });
 
           commit("setFile", {id:payload, file: blob});
-          
+
             return true;
         }).
             catch((err) => {
