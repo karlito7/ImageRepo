@@ -1,12 +1,13 @@
 import { StyleSheet, View, Text, Pressable, Image } from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import usePostImage from "../hooks/use-post-image";
 
 export default function PhotoUploadSection() {
   const [image, setImage] = useState();
+  const [data, postData] = usePostImage();
 
   const uploadImageHandler = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -17,6 +18,8 @@ export default function PhotoUploadSection() {
     console.log(result);
 
     if (!result.canceled) {
+      console.log(result.assets[0].uri);
+      postData(result.assets[0].uri);
       setImage(result.assets[0].uri);
     }
   };
@@ -26,7 +29,12 @@ export default function PhotoUploadSection() {
       <Pressable style={styles.button} onPress={uploadImageHandler}>
         <Text style={styles.text}>+</Text>
       </Pressable>
-      {image && <Image src={image} style={{ width: "100%", height: "100%" }} />}
+      {image && (
+        <Image
+          source={{ uri: image }}
+          style={{ width: "100%", height: "100%" }}
+        />
+      )}
     </View>
   );
 }
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   container: {
-    flex: 1,
+    height: 200,
     marginTop: 64,
     width: "100%",
     alignItems: "center",
