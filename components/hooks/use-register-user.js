@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const url = `http://localhost:5000/images/new`;
+const url = "http://localhost:5000/users/register";
 
-const usePostImage = () => {
-  const [data, setData] = useState(-1);
+const useRegisterUser = () => {
+  const [data, setData] = useState();
 
-  const postData = async (data, path) => {
+  const register = async (data) => {
     try {
       setData(-2);
       let response = await fetch(url, {
@@ -18,7 +18,7 @@ const usePostImage = () => {
         let value = await response.json();
         setData(await value);
       } else {
-        console.log("Image POST error");
+        console.log("User register error");
         setData(-3);
       }
     } catch (err) {
@@ -27,7 +27,7 @@ const usePostImage = () => {
     }
   };
 
-  return [data, postData];
+  return [data, register];
 };
 
-export default usePostImage;
+export default useRegisterUser;

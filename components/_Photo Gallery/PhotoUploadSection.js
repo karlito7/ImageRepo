@@ -15,10 +15,7 @@ export default function PhotoUploadSection() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
-      console.log(result.assets[0].uri);
       postData(result.assets[0].uri);
       setImage(result.assets[0].uri);
     }
@@ -44,7 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     height: 50,
     width: 50,
-    marginTop: 64,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
@@ -55,8 +51,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   container: {
-    height: 200,
-    marginTop: 64,
+    height: 75,
+    marginTop: 50,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-start",

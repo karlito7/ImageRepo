@@ -1,36 +1,43 @@
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
 import useGetImages from "./components/hooks/use-get-images";
 import PhotoUploadSection from "./components/_Photo Gallery/PhotoUploadSection";
+import UserAuth from "./components/_User_auth/UserAuth";
+import UserProvider from "./components/store/UserProvider";
+import UserContext from "./components/store/user-context";
 
 export default function App() {
   const [data, getData] = useGetImages();
+  const userCtx = useContext(UserContext);
 
   useEffect(() => {
-    console.log(data);
+    if (data === -1 || data === -2 || data === -3) console.log(data);
   }, [data]);
 
   return (
-    <ScrollView contentContainerStyle={styles.baseContainer}>
-      <PhotoUploadSection />
-      <ScrollView style={styles.container}>
-        {data !== undefined &&
-          data !== -1 &&
-          data !== -2 &&
-          data !== -3 &&
-          data.map((image, i) => {
-            return (
-              <Image
-                key={i}
-                source={{ uri: image }}
-                style={{ width: 100, height: 150 }}
-              />
-            );
-          })}
-      </ScrollView>
-      <StatusBar style="auto" />
-    </ScrollView>
+    <UserProvider>
+      {!userCtx.isLoggedIn && <UserAuth />}
+      <View style={styles.baseContainer}>
+        <PhotoUploadSection />
+        <ScrollView style={styles.container}>
+          {data !== undefined &&
+            data !== -1 &&
+            data !== -2 &&
+            data !== -3 &&
+            data.map((image, i) => {
+              return (
+                <Image
+                  key={i}
+                  source={{ uri: image.data }}
+                  style={{ width: 350, height: 150 }}
+                />
+              );
+            })}
+        </ScrollView>
+        <StatusBar style="auto" />
+      </View>
+    </UserProvider>
   );
 }
 

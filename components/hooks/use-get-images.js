@@ -16,8 +16,8 @@ const useGetImages = () => {
 
       if (response.ok) {
         let value = await response.json();
-        console.log(value);
         setData(await value);
+        console.log(value);
       } else {
         console.log("Image fetch error");
         setData(-3);
