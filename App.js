@@ -8,6 +8,7 @@ import {
   Image,
   Pressable,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import useGetImages from "./components/hooks/use-get-images";
 import PhotoUploadSection from "./components/_Photo Gallery/PhotoUploadSection";
@@ -15,9 +16,10 @@ import UserAuth from "./components/_User_auth/UserAuth";
 import UserProvider from "./components/store/UserProvider";
 import UserContext from "./components/store/user-context";
 import ImageFocus from "./components/_Photo Gallery/ImageFocus";
+import { FlatList } from "react-native-web";
 
 export default function App() {
-  const [data, getData] = useGetImages();
+  const [data, setData, getData] = useGetImages();
   const [imageFocused, setImageFocused] = useState({
     isFocused: false,
     post: false,
@@ -52,25 +54,40 @@ export default function App() {
             image={focusInfo}
             imageFocused={imageFocused}
             setImageFocused={setImageFocused}
+            mainData={data}
+            setData={setData}
           />
         )}
 
-        <ScrollView style={styles.container}>
-          {data !== undefined &&
-            data !== -1 &&
-            data !== -2 &&
-            data !== -3 &&
-            data.map((image, i) => {
-              return (
-                <Pressable onPress={() => onImageFocus(image)} key={i}>
-                  <Image
-                    source={{ uri: image.data }}
-                    style={{ width: 350, height: 150 }}
-                  />
-                </Pressable>
-              );
-            })}
-        </ScrollView>
+        {data === -3 ? (
+          <Text style={styles.text}>No Data</Text>
+        ) : data === -2 || data === -1 ? (
+          <View style={styles.loader}>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : (
+          data &&
+          data.length > 0 && (
+            <FlatList
+              numColumns={3}
+              data={data}
+              columnWrapperStyle={styles.row}
+              renderItem={(item) => {
+                return (
+                  <View style={styles.imageContainer}>
+                    <Pressable onPress={() => onImageFocus(item.item)}>
+                      <Image
+                        source={{ uri: item.item.data }}
+                        style={{ width: 110, height: 110 }}
+                      />
+                    </Pressable>
+                  </View>
+                );
+              }}
+            />
+          )
+        )}
+
         <StatusBar style="auto" />
       </View>
     </UserProvider>
@@ -90,5 +107,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  imageContainer: {
+    backgroundColor: "white",
+    margin: 3,
+  },
+  row: {
+    flex: 1,
+    justifyContent: "flex-start",
+  },
+  loader: {
+    marginTop: 32,
   },
 });

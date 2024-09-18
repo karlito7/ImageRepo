@@ -28,7 +28,7 @@ const useGetImages = () => {
     }
   };
 
-  return [data, getData];
+  return [data, setData, getData];
 };
 
 export default useGetImages;

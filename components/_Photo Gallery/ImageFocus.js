@@ -4,36 +4,60 @@ import { StyleSheet } from "react-native";
 import usePostImage from "../hooks/use-post-image";
 import usePatchImage from "../hooks/use-patch-image";
 import useDeleteImage from "../hooks/use-delete-image";
+import { ActivityIndicator } from "react-native-web";
 
-export default function ImageFocus({ image, imageFocused, setImageFocused }) {
+export default function ImageFocus({
+  image,
+  imageFocused,
+  setImageFocused,
+  mainData,
+  setData,
+}) {
   const [title, setTitle] = useState(
     image && image.title ? image.title : "HELLO NEW IMAGE"
   );
 
-  const [poData, postData] = usePostImage();
-  const [paData, patchData] = usePatchImage();
-  const [deData, deleteData] = useDeleteImage();
+  const postData = usePostImage();
+  const patchData = usePatchImage();
+  const deleteData = useDeleteImage();
+  const [isLoading, setIsLoading] = useState(false);
 
   const changeTitleHandler = (e) => {
     setTitle(e.target.value);
-    console.log("CHANGE TITLE");
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = async () => {
     const data = {
       ...image,
       title: title,
     };
 
     if (imageFocused.post) {
-      postData(data);
+      setIsLoading(true);
+      const response = await postData(data);
+      if (response) {
+        setImageFocused({ isFocused: false, post: false });
+        setData((prevData) => [...prevData, data]);
+      }
     } else {
-      patchData(data);
+      setIsLoading(true);
+      const response = await patchData(data);
+      if (response) {
+        setImageFocused({ isFocused: false, post: false });
+        mainData[mainData.findIndex((el) => el._id === data._id)] = data;
+        setData(mainData);
+      }
     }
   };
 
-  const onDeleteHandler = () => {
-    deleteData(image);
+  const onDeleteHandler = async () => {
+    setIsLoading(true);
+    const response = await deleteData(image);
+
+    if (response) {
+      setData((prevData) => prevData.filter((el) => el._id !== image._id));
+      setImageFocused({ isFocused: false, post: false });
+    }
   };
 
   return (
@@ -48,6 +72,11 @@ export default function ImageFocus({ image, imageFocused, setImageFocused }) {
           value={title}
           onChange={changeTitleHandler}
         />
+        {isLoading && (
+          <View style={styles.loader}>
+            <ActivityIndicator size="large" color="#FFFFFF" />
+          </View>
+        )}
         <Image
           source={
             image && image.data ? image.data : require("../../assets/icon.png")
@@ -88,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#00000053",
+    backgroundColor: "#0000006a",
     gap: 16,
   },
   titleInput: {
@@ -116,5 +145,15 @@ const styles = StyleSheet.create({
   },
   actionText: {
     fontWeight: 600,
+  },
+  loader: {
+    position: "absolute",
+    backgroundColor: "#0000004c",
+    width: "100%",
+    height: "100%",
+    zIndex: 1000,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

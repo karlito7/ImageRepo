@@ -3,11 +3,8 @@ import { useEffect, useState } from "react";
 const url = `http://localhost:5000/images/`;
 
 const usePatchImage = () => {
-  const [data, setData] = useState(-1);
-
-  const patchData = async (data, path) => {
+  const patchData = async (data) => {
     try {
-      setData(-2);
       let response = await fetch(`${url}${data._id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -15,19 +12,16 @@ const usePatchImage = () => {
       });
 
       if (response.ok) {
-        let value = await response.json();
-        setData(await value);
+        return response;
       } else {
         console.log("Image PATCH error");
-        setData(-3);
       }
     } catch (err) {
-      setData(-3);
       console.log(err);
     }
   };
 
-  return [data, patchData];
+  return patchData;
 };
 
 export default usePatchImage;

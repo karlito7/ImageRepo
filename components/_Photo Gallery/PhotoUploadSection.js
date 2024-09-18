@@ -4,8 +4,6 @@ import * as ImagePicker from "expo-image-picker";
 import usePostImage from "../hooks/use-post-image";
 
 export default function PhotoUploadSection({ setFocusInfo, setImageFocused }) {
-  const [data, postData] = usePostImage();
-
   const uploadImageHandler = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -32,8 +30,8 @@ export default function PhotoUploadSection({ setFocusInfo, setImageFocused }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "gray",
-    height: 50,
-    width: 50,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
