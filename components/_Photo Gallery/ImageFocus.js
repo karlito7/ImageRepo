@@ -3,6 +3,7 @@ import { TextInput, View, Modal, Image, Pressable, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import usePostImage from "../hooks/use-post-image";
 import usePatchImage from "../hooks/use-patch-image";
+import useDeleteImage from "../hooks/use-delete-image";
 
 export default function ImageFocus({ image, imageFocused, setImageFocused }) {
   const [title, setTitle] = useState(
@@ -11,6 +12,7 @@ export default function ImageFocus({ image, imageFocused, setImageFocused }) {
 
   const [poData, postData] = usePostImage();
   const [paData, patchData] = usePatchImage();
+  const [deData, deleteData] = useDeleteImage();
 
   const changeTitleHandler = (e) => {
     setTitle(e.target.value);
@@ -28,6 +30,10 @@ export default function ImageFocus({ image, imageFocused, setImageFocused }) {
     } else {
       patchData(data);
     }
+  };
+
+  const onDeleteHandler = () => {
+    deleteData(image);
   };
 
   return (
@@ -54,6 +60,13 @@ export default function ImageFocus({ image, imageFocused, setImageFocused }) {
               {imageFocused.post ? "Add" : "Save"}
             </Text>
           </Pressable>
+
+          {!imageFocused.post && (
+            <Pressable style={styles.actionButton} onPress={onDeleteHandler}>
+              <Text style={styles.actionText}>Delete</Text>
+            </Pressable>
+          )}
+
           <Pressable
             style={styles.actionButton}
             onPress={() => {
