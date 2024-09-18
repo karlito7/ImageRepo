@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserContext from "./user-context";
 
 const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState();
   const [token, setToken] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
 
   const userContext = {
     userInfo,

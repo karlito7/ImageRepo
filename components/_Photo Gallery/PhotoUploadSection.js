@@ -3,8 +3,7 @@ import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import usePostImage from "../hooks/use-post-image";
 
-export default function PhotoUploadSection() {
-  const [image, setImage] = useState();
+export default function PhotoUploadSection({ setFocusInfo, setImageFocused }) {
   const [data, postData] = usePostImage();
 
   const uploadImageHandler = async () => {
@@ -16,8 +15,8 @@ export default function PhotoUploadSection() {
     });
 
     if (!result.canceled) {
-      postData(result.assets[0].uri);
-      setImage(result.assets[0].uri);
+      setFocusInfo({ title: "NEW IMAGE", data: result.assets[0].uri });
+      setImageFocused({ isFocused: true, post: true });
     }
   };
 
@@ -26,12 +25,6 @@ export default function PhotoUploadSection() {
       <Pressable style={styles.button} onPress={uploadImageHandler}>
         <Text style={styles.text}>+</Text>
       </Pressable>
-      {image && (
-        <Image
-          source={{ uri: image }}
-          style={{ width: "100%", height: "100%" }}
-        />
-      )}
     </View>
   );
 }
