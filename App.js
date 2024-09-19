@@ -28,11 +28,6 @@ export default function App() {
   const userCtx = useContext(UserContext);
 
   useEffect(() => {
-    console.log("login");
-    console.log("app " + userCtx.isLoggedIn);
-  }, [userCtx.isLoggedIn]);
-
-  useEffect(() => {
     if (data === -1 || data === -2 || data === -3) console.log(data);
   }, [data]);
 
@@ -58,7 +53,7 @@ export default function App() {
             setData={setData}
           />
         )}
-
+        <Text style={styles.title}>ImageRepo Gallery</Text>
         {data === -3 ? (
           <Text style={styles.text}>No Data</Text>
         ) : data === -2 || data === -1 ? (
@@ -68,23 +63,25 @@ export default function App() {
         ) : (
           data &&
           data.length > 0 && (
-            <FlatList
-              numColumns={3}
-              data={data}
-              columnWrapperStyle={styles.row}
-              renderItem={(item) => {
-                return (
-                  <View style={styles.imageContainer}>
-                    <Pressable onPress={() => onImageFocus(item.item)}>
-                      <Image
-                        source={{ uri: item.item.data }}
-                        style={{ width: 110, height: 110 }}
-                      />
-                    </Pressable>
-                  </View>
-                );
-              }}
-            />
+            <View style={styles.container}>
+              <FlatList
+                numColumns={3}
+                data={data}
+                columnWrapperStyle={styles.row}
+                renderItem={(item) => {
+                  return (
+                    <View style={styles.imageContainer}>
+                      <Pressable onPress={() => onImageFocus(item.item)}>
+                        <Image
+                          source={{ uri: item.item.data }}
+                          style={{ width: 110, height: 110 }}
+                        />
+                      </Pressable>
+                    </View>
+                  );
+                }}
+              />
+            </View>
           )
         )}
 
@@ -98,15 +95,21 @@ const styles = StyleSheet.create({
   text: {
     color: "whitesmoke",
   },
+  title: {
+    color: "whitesmoke",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 32,
+  },
   baseContainer: {
     height: "100%",
     width: "100%",
-    backgroundColor: "#141414",
+    backgroundColor: "#201f1f",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   container: {
-    flex: 1,
+    marginTop: 45,
   },
   imageContainer: {
     backgroundColor: "white",
@@ -117,6 +120,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   loader: {
-    marginTop: 32,
+    marginTop: 50,
   },
 });

@@ -1,5 +1,13 @@
 import { useState, useContext, useEffect } from "react";
-import { StyleSheet, Modal, View, Text, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  Modal,
+  View,
+  Text,
+  TextInput,
+  Button,
+  Image,
+} from "react-native";
 import useRegisterUser from "../hooks/use-register-user";
 import useLoginUser from "../hooks/use-login-user";
 import UserContext from "../store/user-context";
@@ -12,11 +20,6 @@ export default function UserAuth() {
   const [loginData, login] = useLoginUser();
 
   const userCtx = useContext(UserContext);
-
-  useEffect(() => {
-    console.log("login");
-    console.log("app " + userCtx.isLoggedIn);
-  }, [userCtx.isLoggedIn]);
 
   const onUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -47,10 +50,21 @@ export default function UserAuth() {
 
   return (
     <>
-      {userCtx.isLoggedIn && (
+      {!userCtx.isLoggedIn && (
         <Modal visible={!userCtx.isLoggedIn}>
           <View style={styles.container}>
-            <Text>User {isRegistering ? "register" : "login"}</Text>
+            <Image
+              source={require("../../assets/logo.png")}
+              style={{
+                height: 150,
+                width: 150,
+                resizeMode: "contain",
+                marginBottom: 32,
+              }}
+            ></Image>
+            <Text style={styles.title}>
+              User {isRegistering ? "register" : "login"}
+            </Text>
             <TextInput
               style={styles.textInput}
               value={username}
@@ -64,18 +78,20 @@ export default function UserAuth() {
               placeholder="Password"
               secureTextEntry={true}
             />
-            <Button
-              title={isRegistering ? "Register" : "Login"}
-              onPress={onSubmit}
-            ></Button>
-            <Button
-              onPress={changeMode}
-              title={
-                isRegistering
-                  ? "Switch to user register"
-                  : "Switch to user login"
-              }
-            ></Button>
+            <View style={{ marginTop: 32, gap: 8 }}>
+              <Button
+                title={isRegistering ? "Register" : "Login"}
+                onPress={onSubmit}
+              ></Button>
+              <Button
+                onPress={changeMode}
+                title={
+                  isRegistering
+                    ? "Switch to user login"
+                    : "Switch to user register"
+                }
+              ></Button>
+            </View>
           </View>
         </Modal>
       )}
@@ -89,11 +105,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     gap: 4,
+    backgroundColor: "#201f1f",
   },
   textInput: {
     margin: 8,
     padding: 8,
     width: "60%",
     borderWidth: 1,
+    color: "whitesmoke",
+    fontWeight: "600",
+    borderColor: "whitesmoke",
+    borderRadius: 10,
+  },
+  title: {
+    color: "whitesmoke",
+    fontWeight: "600",
+    borderColor: "whitesmoke",
+    borderRadius: 10,
+    fontSize: 24,
+    marginBottom: 16,
   },
 });

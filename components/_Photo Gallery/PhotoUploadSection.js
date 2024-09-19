@@ -30,11 +30,14 @@ export default function PhotoUploadSection({ setFocusInfo, setImageFocused }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "gray",
-    paddingHorizontal: 15,
-    paddingVertical: 8,
+    height: 60,
+    width: 60,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
+    position: "absolute",
+    left: 45,
+    bottom: 60,
   },
   text: {
     color: "black",
@@ -42,11 +45,13 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   container: {
-    height: 75,
-    marginTop: 50,
+    height: "100%",
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-start",
     gap: 32,
+    position: "absolute",
+    top: 0,
+    left: 0,
   },
 });

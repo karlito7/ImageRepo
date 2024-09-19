@@ -6,10 +6,6 @@ const UserProvider = ({ children }) => {
   const [token, setToken] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
-
   const userContext = {
     userInfo,
     token,
