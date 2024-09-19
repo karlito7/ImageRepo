@@ -11,9 +11,15 @@ Screenshoot-ovi aplikacije:
     
 ![ImageRepo-Login](https://github.com/user-attachments/assets/48368b2a-daac-4205-ad0c-909ce2f01f7d)
  3.  home page screen
+
+ 
   ![Image Repo-Gallery-Popis Upload-anih Slika](https://github.com/user-attachments/assets/b74e1fd3-83e1-4e16-a289-d376f18742f9)
  4.   dodavanje slika
+
+ 
   ![ImageRepo-Mijenjanje Naziva Slike](https://github.com/user-attachments/assets/97bdaece-517e-4558-8b17-49267d97b3d7)
  5. pregled/brisanje/updatanje naziva slike
+
+ 
      ![ImageRepo-Editiranje slike ˛Brisanje](https://github.com/user-attachments/assets/70fcdc58-8b2b-4392-9399-f74a598cdcb9)
 
