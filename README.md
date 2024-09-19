@@ -7,6 +7,8 @@ Pokretanje aplikacije:
 Screenshoot-ovi aplikacije:
 
  1. login/register screen
+
+    
 ![ImageRepo-Login](https://github.com/user-attachments/assets/48368b2a-daac-4205-ad0c-909ce2f01f7d)
  3.  home page screen
   ![Image Repo-Gallery-Popis Upload-anih Slika](https://github.com/user-attachments/assets/b74e1fd3-83e1-4e16-a289-d376f18742f9)
